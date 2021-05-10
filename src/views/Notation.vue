@@ -33,7 +33,7 @@ export default {
   created() {
     const { mode } = this.$route.params
     this.mode = mode
-  }
+  },
 }
 </script>
 

@@ -6,18 +6,14 @@
           tag="ul"
           flat
         >
-          <v-list-item-group
-            v-model="selectedItem"
+          <list-item 
+            v-for="(val, index) in list" 
+            :key="index"
+            :data="val"
+            :currentIndex="index"
+            @delete="deleteItem"
           >
-            <list-item 
-              v-for="(val, index) in list" 
-              :key="index"
-              :data="val"
-              :currentIndex="index"
-              @delete="deleteItem"
-            >
-            </list-item>
-          </v-list-item-group>
+          </list-item>
         </v-list>
       </v-col>
     </v-row>
@@ -31,12 +27,7 @@
     props: {
       list: Array
     },
-    components: {
-      ListItem
-    },
-    data: () => ({
-      selectedItem: 1
-    }),
+    components: { ListItem },
     methods: {
       deleteItem(index, title) { this.$emit('delete', index, title) }
     }

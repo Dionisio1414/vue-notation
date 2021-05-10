@@ -15,6 +15,7 @@
                         v-model="copyData.title"
                         label="Title"
                         :rules="titlefRules"
+                        @input="changeField"
                         required
                     ></v-text-field>
                     </v-col>
@@ -25,6 +26,7 @@
                         name="input-7-4"
                         :rules="descriptionRules"
                         label="Description"
+                        @input="changeField"
                     ></v-textarea>
                     </v-col>
                     <v-col cols="12">
@@ -43,6 +45,7 @@
                         </v-btn>
                         <v-btn 
                             depressed
+                            :disabled="isEditable"
                             @click="cancel"
                         >
                             Cancel
@@ -110,7 +113,8 @@ export default {
     headerTitle: null,
     currentMessage: null,
     alertMessage: null,
-    alertFlag: false
+    alertFlag: false,
+    isEditable: true
   }),
   methods: {
     ...mapActions(['createNotationItem']),
@@ -140,7 +144,8 @@ export default {
             this.createNotation()
         else
             this.$router.back()
-    }
+    },
+    changeField() { this.isEditable = false }
   },
   mounted() { this.validate() },
   directives: { frag },
